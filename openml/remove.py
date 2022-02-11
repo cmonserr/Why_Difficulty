@@ -6,7 +6,7 @@ import pandas as pd
 # avail_pretrained_models = timm.list_models(pretrained=True)
 # print(avail_pretrained_models)
 
-data=pd.read_csv("/home/dcast/adversarial_project/openml/adversarial_images/mnist784_ref_data_adversarial.csv")
+data=pd.read_csv("./openml/adversarial_images/mnist784_ref_data_adversarial.csv")
 print(data.tail(5))
 print(data.head(5))
 print(data.describe())

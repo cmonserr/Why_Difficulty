@@ -44,10 +44,10 @@ def get_accuracy_predict(df):
     accuracy=df.acierta.mean()
     return accuracy
     
-base_path= "/home/dcast/adversarial_project/openml/data/results_experiment_4"
-# base_path= "/home/dcast/adversarial_project/openml/data/results_experiment_shift"
-# base_path= "/home/dcast/adversarial_project/openml/data/results_experiment_blur"
-# base_path= "/home/dcast/adversarial_project/openml/data/results_experiment_watermark"
+base_path= "./openml/data/results_experiment_4"
+# base_path= "./openml/data/results_experiment_shift"
+# base_path= "./openml/data/results_experiment_blur"
+# base_path= "./openml/data/results_experiment_watermark"
 model_type="regressor" #classifier/regressor
 extra_info="without" #with/without or shift/original 
 day="06"

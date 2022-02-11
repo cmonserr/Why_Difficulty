@@ -1,4 +1,4 @@
-program: /home/dcast/adversarial_project/openml/train.py
+program: ./openml/train.py
 method: grid
 metric:
   goal: maximize
@@ -48,7 +48,7 @@ parameters:
     value: 50
     
   path_data:
-    value: /home/dcast/adversarial_project/openml/data
+    value: ./openml/data
 
   num_fold:
     value: 0

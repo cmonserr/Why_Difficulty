@@ -7,7 +7,7 @@ import pandas as pd
 import os
 root_path="images"
 csv="elasticnet_L1_mnist784_ref_data.csv"
-path="/home/dcast/adversarial_project/openml/adversarial_images"
+path="./openml/adversarial_images"
 data=pd.read_csv(os.path.join(path,csv))
 prefix=csv.split("_")[0]+csv.split("_")[1]
 # print(data.head())

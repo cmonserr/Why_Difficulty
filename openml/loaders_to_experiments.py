@@ -105,7 +105,7 @@ class Cifar10LoaderExperiment4(Loader):
         
 class MnistLoaderExperiment4(Loader):
     def __init__(self, input_size:int) -> None:
-        dir_csv_file="/home/dcast/adversarial_project/openml/adversarial_images/mnist784_ref_data_adversarial.csv"
+        dir_csv_file="./openml/adversarial_images/mnist784_ref_data_adversarial.csv"
         reshape_shape=(32,32) #revisar
         einum_reshape='ij->ij'
         transform=A.Compose(
@@ -128,7 +128,7 @@ class MnistLoaderExperiment4(Loader):
         
 class MnistLoaderExperimentWaterMark(Dataset):
     def __init__(self) -> None:
-        dir_csv_file="/home/dcast/adversarial_project/openml/data/mnist_784.Class_Dffclt_Dscrmn_MeanACC.csv"
+        dir_csv_file="./openml/data/mnist_784.Class_Dffclt_Dscrmn_MeanACC.csv"
         reshape_shape=(28,28) #revisar
         input_size=32
         einum_reshape='ij->ij'
@@ -227,13 +227,13 @@ class MnistLoaderExperimentWaterMark(Dataset):
             # first_array=255*first_array
             # first_array=self._watermark_by_class(first_array)
             first_array=first_array.astype("uint8")
-            cv2.imwrite(os.path.join("/home/dcast/adversarial_project/openml/data/results_experiment_watermark",
+            cv2.imwrite(os.path.join("./openml/data/results_experiment_watermark",
                                      str(label)+".png"),first_array)
             plt.imshow(first_array) #multiplcar por
             #Actually displaying the plot if you are not in interactive mode
             plt.show()
             #Saving plot
-            plt.savefig(os.path.join("/home/dcast/adversarial_project/openml/data/results_experiment_watermark",
+            plt.savefig(os.path.join("./openml/data/results_experiment_watermark",
                                      "save.png"))
             # self.img_to_print=False
     def draw_top_left(self,img):
