@@ -33,7 +33,7 @@ class ExperimentWaterMarkDataset(Callback):
     def __init__(self,dm,config:CONFIG) -> None:
         super().__init__()
         self.config=config
-        self.path_save_result="/home/dcast/adversarial_project/openml/data/results_experiment_watermark"
+        self.path_save_result="./openml/data/results_experiment_watermark"
         self.size_experiment=1000
         self.dataset_val=dm.data_val
         self.create_dataloaders()
@@ -180,7 +180,7 @@ class ExperimentBlurDataset(Callback):
     def __init__(self,dm,config:CONFIG) -> None:
         super().__init__()
         self.config=config
-        self.path_save_result="/home/dcast/adversarial_project/openml/data/results_experiment_blur"
+        self.path_save_result="./openml/data/results_experiment_blur"
         self.size_experiment=1000
         self.dataset_val=dm.data_val
         self.create_dataloaders()
@@ -332,7 +332,7 @@ class ExperimentShiftDataset(Callback):
         self.create_new_dataset()
         
         self.save_result=True
-        self.path_save_result="/home/dcast/adversarial_project/openml/data/results_experiment_shift"
+        self.path_save_result="./openml/data/results_experiment_shift"
     def create_original_dataset(self):
         
         self.original_data_val=self.dataset_original.data_val
@@ -438,8 +438,8 @@ class Experiment4WithAdversarialExamples(Callback):
         super().__init__()
         self.train_val_dataset_initial=torch.utils.data.ConcatDataset([dm.data_train,dm.data_val])
         self.config=config
-        dir_csv_file="/home/dcast/adversarial_project/openml/adversarial_images/mnist784_ref_data_adversarial.csv"
-        self.path_save_result="/home/dcast/adversarial_project/openml/data/results_experiment_4"
+        dir_csv_file="./openml/adversarial_images/mnist784_ref_data_adversarial.csv"
+        self.path_save_result="./openml/data/results_experiment_4"
         self.df_adversarial=pd.read_csv(dir_csv_file)
         self.number_examples_originals=len(self.train_val_dataset_initial)
         self.number_examples_adversarials=len(self.df_adversarial)
@@ -669,8 +669,8 @@ class PredictionPlotsAfterTrain(Callback):
         super(PredictionPlotsAfterTrain,self).__init__()
         self.df_pred=pd.DataFrame()
         self.split=split
-        self.folder_images="/home/dcast/adversarial_project/openml/results"
-        self.folder_csv_result="/home/dcast/adversarial_project/openml/data/results"
+        self.folder_images="./openml/results"
+        self.folder_csv_result="./openml/data/results"
         self.prefix=split
         self.dataset_name=dataset_name
         self.model_name=model_name
@@ -884,7 +884,7 @@ class PredictionPlotsAfterTrain(Callback):
                             title="grafico de barras para correlacionar valores por ranking")
         
         if "labels" in self.df_pred.columns:
-            self.df_pred.to_csv("/home/dcast/adversarial_project/openml/results_to_Carlos.csv")
+            self.df_pred.to_csv("./openml/results_to_Carlos.csv")
             # self.df_pred=self.df_pred.sample(frac=0.01)
             self._scatter_plot(x=self.df_pred.Dffclt,
                            y=self.df_pred.results,

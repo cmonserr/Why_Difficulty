@@ -1,7 +1,7 @@
 import pandas as pd
 
-file_with_dffclt="/home/dcast/adversarial_project/openml/data/Fashion-MNIST.Diff6.RefClass.csv"
-file_with_labels="/home/dcast/adversarial_project/openml/data/Fashion-MNIST.csv"
+file_with_dffclt="./openml/data/Fashion-MNIST.Diff6.RefClass.csv"
+file_with_labels="./openml/data/Fashion-MNIST.csv"
 data_dffclt=pd.read_csv(file_with_dffclt,index_col="Unnamed: 0")
 
 data_labels=pd.read_csv(file_with_labels)
@@ -22,11 +22,11 @@ print(data_total.shape)
 
 print(data_total.head(5))
 
-# data=pd.read_csv("/home/dcast/adversarial_project/openml/data/mnist_784V2.Diff6.RefClass.csv")
+# data=pd.read_csv("./openml/data/mnist_784V2.Diff6.RefClass.csv")
 # median_dffclt=data.Dffclt.median()
 # data['Hard'] = [0 if x<median_dffclt else 1  for x in data['Dffclt']]
 
-# data.to_csv("/home/dcast/adversarial_project/openml/data/mnist_784V2.Clasification.csv",index=False)
+# data.to_csv("./openml/data/mnist_784V2.Clasification.csv",index=False)
 
 # print(data.Hard)
 # print(data.Hard.describe())

@@ -4,10 +4,13 @@ import sys
 import uuid
 from pytorch_lightning.core import datamodule
 from torch.utils import data
+from pathlib import Path
+import os
 
 # sys.path.append("/content/adversarial_project") #to work in colab
-sys.path.append("/home/dcast/adversarial_project")
-import os
+directorio = os.path.join(Path.home(), "adversarial_project")
+sys.path.append(directorio) #para poder acceder a los ficheros como librerías (recuerda añadir __init__.py)
+os.chdir(directorio) #para fijar este directorio como el directorio de trabajo
 
 import pytorch_lightning as pl
 import torch
@@ -19,7 +22,7 @@ from openml.builders import build_dataset, get_callbacks, get_trainer,get_system
 from openml.config import CONFIG, create_config_dict
 import pandas as pd
 
-##code to run cd /home/dcast/adversarial_project ; /usr/bin/env /home/dcast/anaconda3/envs/deep_learning_torch/bin/python  -- /home/dcast/adversarial_project/openml/train.py
+##code to run cd ./adversarial_project ; /usr/bin/env ./anaconda3/envs/deep_learning_torch/bin/python  -- ./openml/train.py
 def apply_train_test():
     def get_new_system_and_do_training_and_test(config,data_module,wandb_logger,callbacks,num_repeat=None,num_fold=None,run_test:bool=False):
         model=get_system(config,data_module,num_fold,num_repeat=num_repeat)
@@ -46,7 +49,7 @@ def apply_train_test():
     config_dict["id_group"]=init_id
     wandb.init(
         project='IRT-project',
-                entity='dcastf01',
+                entity='cmonserr2',
                 config=config_dict)
     
     wandb_logger = WandbLogger( 
@@ -79,7 +82,7 @@ def apply_train_test():
                     config_dict["id_group"]=init_id
                     wandb.init(
                         project='IRT-project',
-                                entity='dcastf01',
+                                entity='cmonserr2',
                                 config=config_dict)
                     
                     wandb_logger = WandbLogger( 
@@ -105,7 +108,7 @@ def apply_train_test():
        
         # wandb.init(
         #     project='IRT-project',
-        #             entity='dcastf01',
+        #             entity='cmonserr2',
         #             config=config_dict)
         
         # wandb_logger = WandbLogger( 

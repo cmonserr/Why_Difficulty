@@ -1,6 +1,6 @@
 import os
 import sys
-sys.path.append("/home/dcast/adversarial_project")
+sys.path.append("/home/cmonserr/adversarial_project")
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
@@ -33,7 +33,7 @@ class TargetAttack(Enum):
 
 #cd /home/dcast/adversarial_project ; /usr/bin/env /home/dcast/anaconda3/envs/deep_learning_torch/bin/python -- /home/dcast/adversarial_project/openml/creating_images_different_epsilon.py 
 
-path_to_save_img="/home/dcast/adversarial_project/openml/adversarial_images"
+path_to_save_img="/home/cmonserr/adversarial_project/openml/adversarial_images"
     
 def save_img(img,label_one_hot,extra="none"):
     label=np.argmax(label_one_hot)

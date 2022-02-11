@@ -33,7 +33,7 @@ def generate_corr_and_rank(df:pd.DataFrame):
     corr=df.corr(method="spearman")  
     print(corr)
     
-path_with_result:str="/home/dcast/adversarial_project/openml/data/results"
+path_with_result:str="./openml/data/results"
 
 lr_used:str="0.001"
 model=ModelsAvailable.densenet121
