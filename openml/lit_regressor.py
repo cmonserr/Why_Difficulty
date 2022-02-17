@@ -1,6 +1,6 @@
 
 from typing import Optional
-
+import sys
 import timm
 import torch
 import torch.nn as nn
@@ -54,11 +54,15 @@ class LitRegressor(LitSystem):
         return self.step(x)
     
     def step(self,x):
-        x=self.model(x)
-        token_mean=self.token_mean.expand(x.shape[0],-1)
-        x=torch.cat((x,token_mean),dim=1)
-        y=self.regressor(x)
-        y=torch.clamp(y,min=-6,max=+6)
+        m=self.model
+        m.fc = self.regressor
+
+        y = m(x)
+
+#        token_mean=self.token_mean.expand(x.shape[0],-1)
+#        x=torch.cat((x,token_mean),dim=1)
+#        y=self.regressor(x)
+        x=torch.clamp(y,min=-6,max=+6)
         return y
     
     def training_step(self, batch,batch_idx):
@@ -125,32 +129,37 @@ class LitRegressor(LitSystem):
                                         pretrained=True,
                                         **extras
                                         )
-        elif model_enum==ModelsAvailable.alexnet:
-            self.model=AlexNet(in_chans=in_chans)            
-        elif model_enum==ModelsAvailable.googlenet:
-            self.model=GoogleNet(in_chans=in_chans)
+            linear_sizes = [self.model.get_classifier().in_features]
+        else:
+            print("Modelo preentrenado no existente\n")
+            sys.exit()
+        
+#        model_enum==ModelsAvailable.alexnet:
+#            self.model=AlexNet(in_chans=in_chans)            
+#        elif model_enum==ModelsAvailable.googlenet:
+#            self.model=GoogleNet(in_chans=in_chans)
             
         # 
-        dim_parameter_token=2
-        if CONFIG.only_train_head:
-            for param in self.model.parameters():
-                param.requires_grad=False
-        self.token_mean=nn.Parameter(torch.zeros(dim_parameter_token))
-        
-        if model_enum==ModelsAvailable.resnet50:
-            linear_sizes = [self.model.fc.out_features+dim_parameter_token]
+#        dim_parameter_token=2
+#        if CONFIG.only_train_head:
+#            for param in self.model.parameters():
+#                param.requires_grad=False
+#        self.token_mean=nn.Parameter(torch.zeros(dim_parameter_token))
+#        
+#        if model_enum==ModelsAvailable.resnet50:
+#            linear_sizes = [self.model.fc.out_features+dim_parameter_token]
             # self.aditional_token=nn.Parameter(torch.zeros())
-        elif model_enum==ModelsAvailable.densenet121:
-            linear_sizes=[self.model.classifier.out_features+dim_parameter_token]
+#        elif model_enum==ModelsAvailable.densenet121:
+#            linear_sizes=[self.model.classifier.out_features+dim_parameter_token]
             # self.aditional_token=nn.Parameter(torch.zeros())
-        elif model_enum==ModelsAvailable.vgg16:
-            linear_sizes=[self.model.head.fc.out_features+dim_parameter_token]
+#        elif model_enum==ModelsAvailable.vgg16:
+#            linear_sizes=[self.model.head.fc.out_features+dim_parameter_token]
         
-        elif model_enum==ModelsAvailable.alexnet:
-            linear_sizes=[256*3*3+dim_parameter_token]
+#        elif model_enum==ModelsAvailable.alexnet:
+#            linear_sizes=[256*3*3+dim_parameter_token]
         
-        elif model_enum==ModelsAvailable.googlenet:
-            linear_sizes=[1024+dim_parameter_token]
+#        elif model_enum==ModelsAvailable.googlenet:
+#            linear_sizes=[1024+dim_parameter_token]
         
         
         if features_out_layer3:
@@ -160,7 +169,7 @@ class LitRegressor(LitSystem):
             linear_sizes.append(features_out_layer2)
         if features_out_layer1:   
             linear_sizes.append(features_out_layer1)
-            
+
 
         if is_mlp_preconfig:
             self.regressor=Mlp(linear_sizes[0],linear_sizes[1])
@@ -176,6 +185,8 @@ class LitRegressor(LitSystem):
             if dropout2:
                 linear_layers.insert(-2,nn.Dropout(0.25))
             self.regressor=nn.Sequential(*linear_layers)
+
+        
         
         # if model_enum==ModelsAvailable.resnet50:
         #     self.model.fc=self.regressor

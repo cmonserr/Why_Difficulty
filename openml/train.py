@@ -48,7 +48,7 @@ def apply_train_test():
     config_dict=create_config_dict(config)
     config_dict["id_group"]=init_id
     wandb.init(
-        project='IRT-project',
+        project='IRT-project-removing-head',
                 entity='cmonserr2',
                 config=config_dict)
     
@@ -81,7 +81,7 @@ def apply_train_test():
                     config_dict=create_config_dict(config)
                     config_dict["id_group"]=init_id
                     wandb.init(
-                        project='IRT-project',
+                        project='IRT-project-removing-head',
                                 entity='cmonserr2',
                                 config=config_dict)
                     
