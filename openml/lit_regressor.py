@@ -54,15 +54,13 @@ class LitRegressor(LitSystem):
         return self.step(x)
     
     def step(self,x):
-        m=self.model
-        m.fc = self.regressor
 
-        y = m(x)
+        y = self.model(x)
 
 #        token_mean=self.token_mean.expand(x.shape[0],-1)
 #        x=torch.cat((x,token_mean),dim=1)
 #        y=self.regressor(x)
-        x=torch.clamp(y,min=-6,max=+6)
+        y=torch.clamp(y,min=-6,max=+6)
         return y
     
     def training_step(self, batch,batch_idx):
@@ -186,7 +184,8 @@ class LitRegressor(LitSystem):
                 linear_layers.insert(-2,nn.Dropout(0.25))
             self.regressor=nn.Sequential(*linear_layers)
 
-        
+        #OJO CON LAS CABECERAS, DEPENDEN DEL MODELO
+        self.model.fc = self.regressor
         
         # if model_enum==ModelsAvailable.resnet50:
         #     self.model.fc=self.regressor
