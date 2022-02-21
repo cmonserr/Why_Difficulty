@@ -34,6 +34,9 @@ def apply_train_test():
         # model=autotune_lr(trainer,model,data_module,get_auto_lr=config.AUTO_LR)
         
         result=trainer.fit(model,data_module)
+
+        trainer.save_checkpoint(os.path.join(Path.home(),"adversarial_project/Results/example.ckpt"))
+
         if run_test and False:
             result=trainer.test(model,test_dataloaders=data_module.test_dataloader())
         
@@ -70,6 +73,7 @@ def apply_train_test():
         wandb.run.name=config.experiment_name[:5]+" "+\
                     datetime.datetime.utcnow().strftime("%Y-%m-%d %X")
         get_new_system_and_do_training_and_test(config,data_module,wandb_logger,callbacks,num_fold=num_fold,run_test=True)
+        wandb.finish()
         
     else:
         results=[]

@@ -185,8 +185,17 @@ class LitRegressor(LitSystem):
             self.regressor=nn.Sequential(*linear_layers)
 
         #OJO CON LAS CABECERAS, DEPENDEN DEL MODELO
-        self.model.fc = self.regressor
+        #self.model.fc = self.regressor
         
+        self.model.fc = nn.Sequential(
+            nn.BatchNorm1d(linear_sizes[0]),
+            nn.Linear(in_features=linear_sizes[0], out_features=256, bias=False),
+            nn.ReLU(),
+            nn.BatchNorm1d(256),
+            nn.Dropout(0.2),
+            nn.Linear(in_features=256, out_features=1, bias=False)
+        )
+
         # if model_enum==ModelsAvailable.resnet50:
         #     self.model.fc=self.regressor
         #     pass
