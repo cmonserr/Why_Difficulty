@@ -189,11 +189,11 @@ class LitRegressor(LitSystem):
         
         self.model.fc = nn.Sequential(
             nn.BatchNorm1d(linear_sizes[0]),
-            nn.Linear(in_features=linear_sizes[0], out_features=256, bias=False),
+            nn.Linear(in_features=linear_sizes[0], out_features=128),
             nn.ReLU(),
-            nn.BatchNorm1d(256),
-            nn.Dropout(0.2),
-            nn.Linear(in_features=256, out_features=1, bias=False)
+            nn.BatchNorm1d(128),
+            # nn.Dropout(0.1), he quitado los bias = false de los nn.Linear
+            nn.Linear(in_features=128, out_features=1)
         )
 
         # if model_enum==ModelsAvailable.resnet50:
