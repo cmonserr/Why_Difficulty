@@ -233,8 +233,8 @@ class MnistLoaderExperimentWaterMark(Dataset):
             #Actually displaying the plot if you are not in interactive mode
             plt.show()
             #Saving plot
-            plt.savefig(os.path.join("./openml/data/results_experiment_watermark",
-                                     "save.png"))
+#            plt.savefig(os.path.join("./openml/data/results_experiment_watermark",
+#                                     "save.png"))
             # self.img_to_print=False
     def draw_top_left(self,img):
         for i in range( 0,self.n_cells_in_row_to_draw):

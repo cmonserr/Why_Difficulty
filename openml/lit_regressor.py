@@ -169,20 +169,20 @@ class LitRegressor(LitSystem):
             linear_sizes.append(features_out_layer1)
 
 
-        if is_mlp_preconfig:
-            self.regressor=Mlp(linear_sizes[0],linear_sizes[1])
-        else:  
-            linear_layers = [nn.Linear(in_f, out_f,) 
-                       for in_f, out_f in zip(linear_sizes, linear_sizes[1:])]
-            if tanh1:
-                linear_layers.insert(0,nn.Tanh())
-            if dropout1:
-                linear_layers.insert(0,nn.Dropout(0.25))
-            if tanh2:
-                linear_layers.insert(-2,nn.Tanh())
-            if dropout2:
-                linear_layers.insert(-2,nn.Dropout(0.25))
-            self.regressor=nn.Sequential(*linear_layers)
+       # if is_mlp_preconfig:
+       #     self.regressor=Mlp(linear_sizes[0],linear_sizes[1])
+       # else:  
+       #     linear_layers = [nn.Linear(in_f, out_f,) 
+       #                for in_f, out_f in zip(linear_sizes, linear_sizes[1:])]
+       #     if tanh1:
+       #         linear_layers.insert(0,nn.Tanh())
+       #     if dropout1:
+       #         linear_layers.insert(0,nn.Dropout(0.25))
+       #     if tanh2:
+       #         linear_layers.insert(-2,nn.Tanh())
+       #     if dropout2:
+       #         linear_layers.insert(-2,nn.Dropout(0.25))
+       #     self.regressor=nn.Sequential(*linear_layers)
 
         #OJO CON LAS CABECERAS, DEPENDEN DEL MODELO
         #self.model.fc = self.regressor

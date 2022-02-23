@@ -35,8 +35,10 @@ def apply_train_test():
         
         result=trainer.fit(model,data_module)
 
-        # torch.save(trainer, os.path.join(Path.home(),"integrated-gradient-pytorch/models/example.dat"))
+
+        #torch.save(model, os.path.join(Path.home(),"integrated-gradient-pytorch/models/example.dat"))
         trainer.save_checkpoint(os.path.join(Path.home(),"integrated-gradient-pytorch/models/example.ckpt"))
+       
 
         if run_test and False:
             result=trainer.test(model,test_dataloaders=data_module.test_dataloader())
