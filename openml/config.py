@@ -71,7 +71,7 @@ class CONFIG(object):
     NUM_WORKERS:int = 0
     SEED:int=1
     # IMG_SIZE:int=28
-    NUM_EPOCHS :int= 2
+    NUM_EPOCHS :int= 50
     LOAD_MODEL :bool= True
     SAVE_MODEL :bool= True
     PATH_CHECKPOINT: str= os.path.join(ROOT_WORKSPACE,"/model/checkpoint")
